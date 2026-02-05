@@ -100,4 +100,5 @@ def extract_info(paper_id: str) -> str:
 
 if __name__ == "__main__":
     # Initialize and run the server
-    mcp.run(transport='stdio')
+    port = int(os.environ.get("PORT", 8001))
+    mcp.run(transport='sse', host='0.0.0.0', port=port)
