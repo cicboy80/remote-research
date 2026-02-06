@@ -3,12 +3,19 @@ import json
 import os
 from typing import List
 from mcp.server.fastmcp import FastMCP
+from mcp.server.transport_security import TransportSecuritySettings
+
 
 
 PAPER_DIR = "papers"
 
-# Initialize FastMCP server
-mcp = FastMCP("research")
+# Initialize FastMCP server with disabled DNS rebinding protection
+mcp = FastMCP(
+    "research",
+    transport_security=TransportSecuritySettings(
+        enable_dns_rebinding_protection=False,
+    )
+)
 
 @mcp.tool()
 def search_papers(topic: str, max_results: int = 5) -> List[str]:
